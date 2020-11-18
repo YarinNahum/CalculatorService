@@ -9,23 +9,14 @@ using System.ServiceModel;
 
 namespace Client
 {
-    class Program
+    class CalcualatorClient
     {
         static void Main(string[] args)
         {
             InstanceContext context = new InstanceContext(new CallbackHandler());
             WCFCalculatorClient c = new WCFCalculatorClient(context);
             c.initializeConnection();
-            c.processRequest("1");
-            c.processRequest("22");
-            c.processRequest("333");
-            c.processRequest("666666");
-            Stack<double> s = c.processRequest("4444");
-            foreach (double x in s)
-            {
-                Console.WriteLine(x);
-            }
-            Console.ReadLine();
+
         }
  
     }

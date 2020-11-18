@@ -8,7 +8,7 @@ using System.ServiceModel.Description;
 
 namespace Calculator_Host
 {
-    class Program
+    class CalculatorHost
     {
         static void Main(string[] args)
         {

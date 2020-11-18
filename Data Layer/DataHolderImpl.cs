@@ -6,7 +6,7 @@ namespace Data_Layer
 {
     public class DataHolderImpl : IDataHolder<double>
     {
-        private readonly Stack<double> s;
+        private Stack<double> s;
 
         public DataHolderImpl()
         {
@@ -22,14 +22,19 @@ namespace Data_Layer
             return s.Count;
         }
 
-        public void InsertElement(double elemnt)
+        public void InsertElement(double element)
         {
-            s.Push(elemnt);
+            s.Push(element);
         }
 
         public double RemoveElement()
         {
             return s.Pop();
+        }
+
+        public void setData(Stack<double> data)
+        {
+            s = new Stack<double>(data);
         }
     }
 }

@@ -7,9 +7,11 @@ namespace Data_Layer
     public interface IDataHolder<T>
     {
         Stack<T> GetData();
-        void InsertElement(T elemnt);
+        void InsertElement(T element);
         T RemoveElement();
         int GetSize();
+
+        void setData(Stack<T> data);
 
     }
 }

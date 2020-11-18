@@ -14,16 +14,19 @@ namespace WCFCalculator_Service
         [OperationContract]
         void initializeConnection();
 
-        [OperationContract]
 
-        Stack<double> processRequest(string request);
-        // TODO: Add your service operations here
+        [OperationContract(IsOneWay = true)]
+        void processRequest(List<string> request);
+
+
+
+
     }
 
     public interface ICallback
     {
         [OperationContract(IsOneWay = true)]
-        void Error(string error);
+        void printMessage(string error);
     }
 
     // Use a data contract as illustrated in the sample below to add composite types to service operations.
