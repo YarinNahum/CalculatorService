@@ -14,12 +14,8 @@ namespace WCFCalculator_Service
         [OperationContract]
         void initializeConnection();
 
-
         [OperationContract(IsOneWay = true)]
         void processRequest(List<string> request);
-
-
-
 
     }
 

@@ -13,11 +13,6 @@ namespace Calculator_Host
         static void Main(string[] args)
         {
             ServiceHost host = new ServiceHost(typeof(WCFCalculator_Service.WCFCalculatorImpl));
-/*            host.AddServiceEndpoint((typeof(WCFCalculator_Service.IWCFCalculator)), new WSHttpBinding(), "");
-            ServiceMetadataBehavior smb = new ServiceMetadataBehavior();
-            smb.HttpsGetEnabled = true;
-            smb.HttpGetEnabled = true;
-            host.Description.Behaviors.Add(smb);*/
             host.Open();
             Console.ReadLine();
 

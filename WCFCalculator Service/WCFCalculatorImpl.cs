@@ -35,11 +35,30 @@ namespace WCFCalculator_Service
                 processSingleRequest(req);
                 if(isError)
                 {
+
                     data.setData(temp);
                     isError = false;
+                    sendStack();
                     return;
                 }
             }
+            sendStack();
+        }
+
+        private void sendStack()
+        {
+            if(data.GetSize() == 0)
+            {
+                Callback.printMessage("The stack is empty");
+                return;
+            }
+            string stack = "";
+            foreach (double x in data.GetData())
+            {
+                stack += x + "\n";
+            }
+            Callback.printMessage(String.Format("The current stack:" + "\n" + "{0}", stack));
+            return;
         }
 
         private void processSingleRequest(string request)
@@ -48,13 +67,22 @@ namespace WCFCalculator_Service
             {
                 double number = Double.Parse(request);
                 data.InsertElement(number);
-            }catch (FormatException e)
+            }catch (FormatException)
             {
+                if(request == "_" && data.GetSize() >=1)
+                {
+                    data.RemoveElement();
+                    return;
+                }
                 if(data.GetSize() >=2)
                     processAction(request);
                 else
                 {
-                    string message = String.Format("You are trying to do an action {0} that requires 2 arguments, but the stack contains only {1} arguments", request, data.GetSize());
+                    string message;
+                    if (request == "_")
+                        message = String.Format("You are trying to do an action {0} that requires 1 argument, but the stack contains only {1} arguments", request, data.GetSize());
+                    else
+                        message = String.Format("You are trying to do an action {0} that requires 2 arguments, but the stack contains only {1} arguments", request, data.GetSize());
                     isError = true;
                     Callback.printMessage(message);
                     Callback.printMessage("Returing the stack to its previous state");

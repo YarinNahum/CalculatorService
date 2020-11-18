@@ -8,11 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Client.CalculatorReference {
+namespace Client.CalculatorService {
     
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CalculatorReference.IWCFCalculator", CallbackContract=typeof(Client.CalculatorReference.IWCFCalculatorCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CalculatorService.IWCFCalculator", CallbackContract=typeof(Client.CalculatorService.IWCFCalculatorCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IWCFCalculator {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/initializeConnection", ReplyAction="http://tempuri.org/IWCFCalculator/initializeConnectionResponse")]
@@ -21,27 +21,27 @@ namespace Client.CalculatorReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/initializeConnection", ReplyAction="http://tempuri.org/IWCFCalculator/initializeConnectionResponse")]
         System.Threading.Tasks.Task initializeConnectionAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/processRequest", ReplyAction="http://tempuri.org/IWCFCalculator/processRequestResponse")]
-        System.Collections.Generic.Stack<double> processRequest(string request);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/processRequest")]
+        void processRequest(string[] request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/processRequest", ReplyAction="http://tempuri.org/IWCFCalculator/processRequestResponse")]
-        System.Threading.Tasks.Task<System.Collections.Generic.Stack<double>> processRequestAsync(string request);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/processRequest")]
+        System.Threading.Tasks.Task processRequestAsync(string[] request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IWCFCalculatorCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/Error")]
-        void Error([System.ServiceModel.MessageParameterAttribute(Name="error")] string error1);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/printMessage")]
+        void printMessage(string error);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IWCFCalculatorChannel : Client.CalculatorReference.IWCFCalculator, System.ServiceModel.IClientChannel {
+    public interface IWCFCalculatorChannel : Client.CalculatorService.IWCFCalculator, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class WCFCalculatorClient : System.ServiceModel.DuplexClientBase<Client.CalculatorReference.IWCFCalculator>, Client.CalculatorReference.IWCFCalculator {
+    public partial class WCFCalculatorClient : System.ServiceModel.DuplexClientBase<Client.CalculatorService.IWCFCalculator>, Client.CalculatorService.IWCFCalculator {
         
         public WCFCalculatorClient(System.ServiceModel.InstanceContext callbackInstance) : 
                 base(callbackInstance) {
@@ -71,11 +71,11 @@ namespace Client.CalculatorReference {
             return base.Channel.initializeConnectionAsync();
         }
         
-        public System.Collections.Generic.Stack<double> processRequest(string request) {
-            return base.Channel.processRequest(request);
+        public void processRequest(string[] request) {
+            base.Channel.processRequest(request);
         }
         
-        public System.Threading.Tasks.Task<System.Collections.Generic.Stack<double>> processRequestAsync(string request) {
+        public System.Threading.Tasks.Task processRequestAsync(string[] request) {
             return base.Channel.processRequestAsync(request);
         }
     }
