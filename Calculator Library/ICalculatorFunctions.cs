@@ -4,6 +4,9 @@ using System.Text;
 
 namespace Calculator_Library
 {
+    /// <summary>
+    /// The interface for the calculator functions
+    /// </summary>
     public interface ICalculatorFunctions
     {
         double Addition(double x, double y);

@@ -7,6 +7,9 @@ using System.ServiceModel;
 
 namespace Calculator_Host
 {
+    /// <summary>
+    /// The main class for the service host. 
+    /// </summary>
     class CalculatorHost
     {
         static void Main()

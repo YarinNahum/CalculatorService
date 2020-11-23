@@ -4,6 +4,11 @@ using System.ServiceModel;
 
 namespace Client
 {
+    /// <summary>
+    /// The main class for the client.
+    /// The client initializes a connection to the service and than waits for the user to 
+    /// enter his request.
+    /// </summary>
     class CalcualatorClient
     {
         static void Main()
@@ -29,7 +34,11 @@ namespace Client
 
             }
         }
-
+        /// <summary>
+        /// Recieves an array of strings and check if each string is valid.
+        /// </summary>
+        /// <param name="requests">Array of strings</param>
+        /// <returns></returns>
         public static bool CheckInput(string[] requests)
         {
             foreach (string str in requests)
