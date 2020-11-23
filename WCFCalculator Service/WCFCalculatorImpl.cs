@@ -6,7 +6,9 @@ using System.ServiceModel;
 using System.Text;
 using Data_Layer;
 using Calculator_Library;
+using ServiceContracts;
 using System.Threading.Tasks;
+
 
 namespace WCFCalculator_Service
 {
@@ -20,36 +22,36 @@ namespace WCFCalculator_Service
         private bool isError = false;
 
 
-        public void initializeConnection()
+        public void InitializeConnection()
         {
             data = new DataHolderImpl();
             calc = new CalculatorFunctionsImpl();
             Console.WriteLine("A new connection");
         }
 
-        public void processRequest(List<string> request)
+        public void ProcessRequest(List<string> request)
         {
             Stack<double> temp = new Stack<double>(data.GetData());
             foreach (string req in request)
             {
-                processSingleRequest(req);
+                ProcessSingleRequest(req);
                 if(isError)
                 {
 
-                    data.setData(temp);
+                    data.SetData(temp);
                     isError = false;
-                    sendStack();
+                    SendStack();
                     return;
                 }
             }
-            sendStack();
+            SendStack();
         }
 
-        private void sendStack()
+        private void SendStack()
         {
             if(data.GetSize() == 0)
             {
-                Callback.printMessage("The stack is empty");
+                Callback.PrintMessage("The stack is empty");
                 return;
             }
             string stack = "";
@@ -57,43 +59,55 @@ namespace WCFCalculator_Service
             {
                 stack += x + "\n";
             }
-            Callback.printMessage(String.Format("The current stack:" + "\n" + "{0}", stack));
+            Callback.PrintMessage(String.Format("The current stack:" + "\n" + "{0}", stack));
             return;
         }
 
-        private void processSingleRequest(string request)
+        private void ProcessSingleRequest(string request)
         {
-            try
+            int size = data.GetSize();
+            switch (request)
             {
-                double number = Double.Parse(request);
-                data.InsertElement(number);
-            }catch (FormatException)
-            {
-                if(request == "_" && data.GetSize() >=1)
-                {
+                case "+":
+                case "-":
+                case "*":
+                case "/":
+                    if (size < 2)
+                    {
+                        ProcessError(request, 2);
+                        return;
+                    }
+                    ProcessAction(request);
+                    break;
+                case "_":
+                    if (size == 0)
+                    {
+                        ProcessError(request, 1);
+                        return;
+                    }
                     data.RemoveElement();
-                    return;
-                }
-                if(data.GetSize() >=2)
-                    processAction(request);
-                else
-                {
-                    string message;
-                    if (request == "_")
-                        message = String.Format("You are trying to do an action {0} that requires 1 argument, but the stack contains only {1} arguments", request, data.GetSize());
-                    else
-                        message = String.Format("You are trying to do an action {0} that requires 2 arguments, but the stack contains only {1} arguments", request, data.GetSize());
-                    isError = true;
-                    Callback.printMessage(message);
-                    Callback.printMessage("Returing the stack to its previous state");
-                    return;
-                }
+                    break;
+                default:
+                    double number = Double.Parse(request);
+                    data.InsertElement(number);
+                    break;
             }
+            
         }
 
- 
+        private void ProcessError(string req, int arguments)
+        {
+            string message = String.Format("You are trying to do an action {0} that requires {1} arguments, but the stack contains only {2} arguments", req,arguments ,data.GetSize());
+            isError = true;
+            Callback.PrintMessage(message);
+            Callback.PrintMessage("Returing the stack to its previous state");
+            return;
 
-        private void processAction(string request)
+        }
+
+
+
+        private void ProcessAction(string request)
         {
             double leftArgument = data.RemoveElement();
             double rightArgument = data.RemoveElement();

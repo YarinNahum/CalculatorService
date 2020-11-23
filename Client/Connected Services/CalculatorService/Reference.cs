@@ -15,24 +15,24 @@ namespace Client.CalculatorService {
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="CalculatorService.IWCFCalculator", CallbackContract=typeof(Client.CalculatorService.IWCFCalculatorCallback), SessionMode=System.ServiceModel.SessionMode.Required)]
     public interface IWCFCalculator {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/initializeConnection", ReplyAction="http://tempuri.org/IWCFCalculator/initializeConnectionResponse")]
-        void initializeConnection();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/InitializeConnection", ReplyAction="http://tempuri.org/IWCFCalculator/InitializeConnectionResponse")]
+        void InitializeConnection();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/initializeConnection", ReplyAction="http://tempuri.org/IWCFCalculator/initializeConnectionResponse")]
-        System.Threading.Tasks.Task initializeConnectionAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IWCFCalculator/InitializeConnection", ReplyAction="http://tempuri.org/IWCFCalculator/InitializeConnectionResponse")]
+        System.Threading.Tasks.Task InitializeConnectionAsync();
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/processRequest")]
-        void processRequest(string[] request);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/ProcessRequest")]
+        void ProcessRequest(string[] request);
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/processRequest")]
-        System.Threading.Tasks.Task processRequestAsync(string[] request);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/ProcessRequest")]
+        System.Threading.Tasks.Task ProcessRequestAsync(string[] request);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface IWCFCalculatorCallback {
         
-        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/printMessage")]
-        void printMessage(string error);
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IWCFCalculator/PrintMessage")]
+        void PrintMessage(string error);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -63,20 +63,20 @@ namespace Client.CalculatorService {
                 base(callbackInstance, binding, remoteAddress) {
         }
         
-        public void initializeConnection() {
-            base.Channel.initializeConnection();
+        public void InitializeConnection() {
+            base.Channel.InitializeConnection();
         }
         
-        public System.Threading.Tasks.Task initializeConnectionAsync() {
-            return base.Channel.initializeConnectionAsync();
+        public System.Threading.Tasks.Task InitializeConnectionAsync() {
+            return base.Channel.InitializeConnectionAsync();
         }
         
-        public void processRequest(string[] request) {
-            base.Channel.processRequest(request);
+        public void ProcessRequest(string[] request) {
+            base.Channel.ProcessRequest(request);
         }
         
-        public System.Threading.Tasks.Task processRequestAsync(string[] request) {
-            return base.Channel.processRequestAsync(request);
+        public System.Threading.Tasks.Task ProcessRequestAsync(string[] request) {
+            return base.Channel.ProcessRequestAsync(request);
         }
     }
 }

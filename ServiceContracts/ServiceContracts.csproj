@@ -4,17 +4,16 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6CB17B57-2620-4DA8-B539-D109ECABEA61}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>Calculator_Host</RootNamespace>
-    <AssemblyName>Calculator Host</AssemblyName>
+    <ProjectGuid>{5CDF2B3B-A004-4238-8CB6-A37FACDEC7DF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ServiceContracts</RootNamespace>
+    <AssemblyName>ServiceContracts</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -24,7 +23,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -44,21 +42,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CalculatorHost.cs" />
+    <Compile Include="IWCFCalculator.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\ServiceContracts\ServiceContracts.csproj">
-      <Project>{5cdf2b3b-a004-4238-8cb6-a37facdec7df}</Project>
-      <Name>ServiceContracts</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCFCalculator Service\WCFCalculator Service.csproj">
-      <Project>{018fdc40-04b4-4dea-85a6-33df8e561289}</Project>
-      <Name>WCFCalculator Service</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

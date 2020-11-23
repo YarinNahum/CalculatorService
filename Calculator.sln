@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Calculator Host", "Calculat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Client", "Client\Client.csproj", "{29A5921B-7362-4E76-80DE-69C620ED5D52}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContracts", "ServiceContracts\ServiceContracts.csproj", "{5CDF2B3B-A004-4238-8CB6-A37FACDEC7DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{29A5921B-7362-4E76-80DE-69C620ED5D52}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29A5921B-7362-4E76-80DE-69C620ED5D52}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29A5921B-7362-4E76-80DE-69C620ED5D52}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5CDF2B3B-A004-4238-8CB6-A37FACDEC7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CDF2B3B-A004-4238-8CB6-A37FACDEC7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CDF2B3B-A004-4238-8CB6-A37FACDEC7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CDF2B3B-A004-4238-8CB6-A37FACDEC7DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

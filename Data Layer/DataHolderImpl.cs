@@ -32,7 +32,7 @@ namespace Data_Layer
             return s.Pop();
         }
 
-        public void setData(Stack<double> data)
+        public void SetData(Stack<double> data)
         {
             s = new Stack<double>(data);
         }

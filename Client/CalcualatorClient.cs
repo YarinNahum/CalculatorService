@@ -1,21 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Client.CalculatorService ;
-using WCFCalculator_Service;
+using Client.CalculatorService;
 using System.ServiceModel;
 
 namespace Client
 {
     class CalcualatorClient
     {
-        static void Main(string[] args)
+        static void Main()
         {
             InstanceContext context = new InstanceContext(new CallbackHandler());
             WCFCalculatorClient calculator = new WCFCalculatorClient(context);
-            calculator.initializeConnection();
+            calculator.InitializeConnection();
             while (true)
             {
                 Console.WriteLine("Waiting for next request");
@@ -28,39 +23,41 @@ namespace Client
                 else
                 {
                     string[] requests = request.Split(' ');
-                    if (checkInput(requests))
-                        calculator.processRequest(requests);
+                    if (CheckInput(requests))
+                        calculator.ProcessRequest(requests);
                 }
 
             }
         }
 
-        public static bool checkInput(string[] requests)
+        public static bool CheckInput(string[] requests)
         {
             foreach (string str in requests)
             {
-                try
+                switch (str)
                 {
-                    Double.Parse(str);
-                }catch (FormatException)
-                {
-                    switch (str)
-                    {
-                        case "+":
-                        case "-":
-                        case "*":
-                        case "/":
-                        case "_":
-                            continue;
-                        case "End":
-                        case "quit":
-                        case "q":
-                            Environment.Exit(0);
+                    case "+":
+                    case "-":
+                    case "*":
+                    case "/":
+                    case "_":
+                        continue;
+                    case "End":
+                    case "quit":
+                    case "q":
+                        Environment.Exit(0);
+                        break;
+                    default:
+                        try
+                        {
+                            Double.Parse(str);
                             break;
-                        default:
+                        }
+                        catch (FormatException)
+                        {
                             Console.WriteLine("Invalid argument {0}", str);
                             return false;
-                    }
+                        }
                 }
             }
             return true;
@@ -71,7 +68,7 @@ namespace Client
     [CallbackBehavior(ConcurrencyMode = ConcurrencyMode.Reentrant)]
     public class CallbackHandler : Client.CalculatorService.IWCFCalculatorCallback
     {
-        public void printMessage(string error)
+        public void PrintMessage(string error)
         {
             Console.WriteLine(error);
         }

@@ -11,7 +11,7 @@ namespace Data_Layer
         T RemoveElement();
         int GetSize();
 
-        void setData(Stack<T> data);
+        void SetData(Stack<T> data);
 
     }
 }

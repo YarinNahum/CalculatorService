@@ -70,21 +70,9 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Calculator Host\Calculator Host.csproj">
-      <Project>{6cb17b57-2620-4da8-b539-d109ecabea61}</Project>
-      <Name>Calculator Host</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Calculator Library\Calculator Library.csproj">
-      <Project>{1f9f76cc-1271-4dfa-9692-75e4d2d51dd2}</Project>
-      <Name>Calculator Library</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Data Layer\Data Layer.csproj">
-      <Project>{bb87dab2-edae-44ff-bd89-747372cb2c5f}</Project>
-      <Name>Data Layer</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\WCFCalculator Service\WCFCalculator Service.csproj">
-      <Project>{018fdc40-04b4-4dea-85a6-33df8e561289}</Project>
-      <Name>WCFCalculator Service</Name>
+    <ProjectReference Include="..\ServiceContracts\ServiceContracts.csproj">
+      <Project>{5cdf2b3b-a004-4238-8cb6-a37facdec7df}</Project>
+      <Name>ServiceContracts</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
