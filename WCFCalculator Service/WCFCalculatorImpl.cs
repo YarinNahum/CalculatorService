@@ -23,6 +23,14 @@ namespace WCFCalculator_Service
         private ICalculatorFunctions calc = null;
         private bool isError = false;
 
+        public WCFCalculatorImpl (IDataHolder<double> data, ICalculatorFunctions calc)
+        {
+            this.data = data;
+            this.calc = calc;
+        }
+
+        public WCFCalculatorImpl() { }
+
         /// <summary>
         /// Create new data holder and calculator object per session
         /// </summary>
@@ -46,7 +54,6 @@ namespace WCFCalculator_Service
                 ProcessSingleRequest(req);
                 if(isError)
                 {
-
                     data.SetData(temp);
                     isError = false;
                     SendStack();
@@ -58,7 +65,7 @@ namespace WCFCalculator_Service
         /// <summary>
         /// Creates a string from the stack and send it to the client using a Callback
         /// </summary>
-        private void SendStack()
+        public void SendStack()
         {
             if(data.GetSize() == 0)
             {
@@ -78,7 +85,7 @@ namespace WCFCalculator_Service
         /// Must be one of: '+', '-', '/', '*' or a number in a double format.
         /// </summary>
         /// <param name="request"></param>
-        private void ProcessSingleRequest(string request)
+        public void ProcessSingleRequest(string request)
         {
             int size = data.GetSize();
             switch (request)
@@ -115,10 +122,10 @@ namespace WCFCalculator_Service
         /// </summary>
         /// <param name="req">A string that causes the error</param>
         /// <param name="arguments">number of arguments that needed to be in the stack for the request</param>
-        private void ProcessError(string req, int arguments)
+        public void ProcessError(string req, int arguments)
         {
-            string message = String.Format("You are trying to do an action {0} that requires {1} arguments, but the stack contains only {2} arguments", req,arguments ,data.GetSize());
             isError = true;
+            string message = String.Format("You are trying to do an action {0} that requires {1} arguments, but the stack contains only {2} arguments", req,arguments ,data.GetSize());
             Callback.PrintMessage(message);
             Callback.PrintMessage("Returing the stack to its previous state");
             return;
@@ -132,7 +139,7 @@ namespace WCFCalculator_Service
         /// The 'request' must be one of: '+', '-', '/' or '*'.
         /// </summary>
         /// <param name="request">String</param>
-        private void ProcessAction(string request)
+        public void ProcessAction(string request)
         {
             double leftArgument = data.RemoveElement();
             double rightArgument = data.RemoveElement();
@@ -148,6 +155,13 @@ namespace WCFCalculator_Service
                     data.InsertElement(calc.Multiplication(leftArgument, rightArgument));
                     break;
                 case "/":
+                    if(rightArgument == 0)
+                    {
+                        isError = true;
+                        Callback.PrintMessage("You are trying to divide by 0");
+                        Callback.PrintMessage("Returing the stack to its previous state");
+                        return;
+                    }
                     data.InsertElement(calc.Division(leftArgument, rightArgument));
                     break;
             }

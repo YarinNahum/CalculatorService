@@ -5,8 +5,4 @@
     <RootNamespace>Data_Layer</RootNamespace>
   </PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Calculator Library\Calculator Library.csproj" />
-  </ItemGroup>
-
 </Project>
