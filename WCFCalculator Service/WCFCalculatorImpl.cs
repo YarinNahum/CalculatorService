@@ -29,8 +29,6 @@ namespace WCFCalculator_Service
             this.calc = calc;
         }
 
-        public WCFCalculatorImpl() { }
-
         /// <summary>
         /// Create new data holder and calculator object per session
         /// </summary>
@@ -69,7 +67,8 @@ namespace WCFCalculator_Service
         {
             if(data.GetSize() == 0)
             {
-                Callback.PrintMessage("The stack is empty");
+                //For testing puposes
+                //Callback.PrintMessage("The stack is empty");
                 return;
             }
             string stack = "";
@@ -77,7 +76,9 @@ namespace WCFCalculator_Service
             {
                 stack += x + "\n";
             }
-            Callback.PrintMessage(String.Format("The current stack:" + "\n" + "{0}", stack));
+            //For Testing purposes
+            //Callback.PrintMessage(String.Format("The current stack:" + "\n" + "{0}", stack));
+            //
             return;
         }
         /// <summary>
@@ -126,8 +127,9 @@ namespace WCFCalculator_Service
         {
             isError = true;
             string message = String.Format("You are trying to do an action {0} that requires {1} arguments, but the stack contains only {2} arguments", req,arguments ,data.GetSize());
-            Callback.PrintMessage(message);
-            Callback.PrintMessage("Returing the stack to its previous state");
+            //For testing purposes
+            //Callback.PrintMessage(message);
+            //Callback.PrintMessage("Returing the stack to its previous state");
             return;
 
         }
@@ -143,16 +145,20 @@ namespace WCFCalculator_Service
         {
             double leftArgument = data.RemoveElement();
             double rightArgument = data.RemoveElement();
+            double answer;
             switch (request)
             {
                 case "+":
-                    data.InsertElement(calc.Addition(leftArgument, rightArgument));
+                    answer = calc.Addition(leftArgument, rightArgument);
+                    data.InsertElement(answer);
                     break;
                 case "-":
-                    data.InsertElement(calc.Subtraction(leftArgument, rightArgument));
+                    answer = calc.Subtraction(leftArgument, rightArgument);
+                    data.InsertElement(answer);
                     break;
                 case "*":
-                    data.InsertElement(calc.Multiplication(leftArgument, rightArgument));
+                    answer = calc.Multiplication(leftArgument, rightArgument);
+                    data.InsertElement(answer);
                     break;
                 case "/":
                     if(rightArgument == 0)
@@ -162,18 +168,20 @@ namespace WCFCalculator_Service
                         Callback.PrintMessage("Returing the stack to its previous state");
                         return;
                     }
-                    data.InsertElement(calc.Division(leftArgument, rightArgument));
+                    answer = calc.Division(leftArgument, rightArgument);
+                    data.InsertElement(answer);
                     break;
             }
         }
 
 
-        ICallback Callback
+        public ICallback Callback
         {
             get
             {
                 return OperationContext.Current.GetCallbackChannel<ICallback>();
             }
+            
         }
 
     }
